@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Wolfrailsalpha::Application.config.secret_key_base = 'bc6f159de8cd31d6e64155038c1d365e5bc5998117999bf3f96fd4d55c8d064d46a75fae76f7191ef66a1afb02bb92496d14584216277763149ac421c9c5f467'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+SampleApp::Application.config.secret_key_base = secure_token
