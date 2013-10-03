@@ -1,0 +1,13 @@
+<% provide(:title, @user.name) %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2"> 
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1> <br> 
+    </div>
+    <div class="span10" id="map">
+    </div>
+  </div>
+</div>

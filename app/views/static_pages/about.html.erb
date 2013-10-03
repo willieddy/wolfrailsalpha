@@ -1,0 +1,28 @@
+<% provide(:title, 'About Us') %>
+<h1>About Us</h1>
+<p>
+This app was made following a rails tutorial. Next on the to-do list: 
+</p>
+
+<ul> 
+  <li>JSON i/o</li> 
+  <ul>
+    <li>Figure out why it works on localhost and not herokuapp</li> 
+    <li>Figure out why respond_to format doesn't work in header of UsersController</li> 
+  </ul> 
+  <li>leaflet maps / postgres hooks</li> 
+  <li>Actual content (this part is tentative)</li> 
+</ul>
+
+<div id="map">
+</div> 
+
+<script> 
+var map = L.map('map').setView([51.505, -0.09], 13);
+L.tileLayer('http://{s}.tile.cloudmade.com/0b9e3b46e10f417182b04a610be00f88/997/256/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+            maxZoom: 18
+            }).addTo(map);
+
+// add a marker in the given location, attach some popup content to it and open the popup
+</script>
