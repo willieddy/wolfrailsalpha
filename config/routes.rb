@@ -1,8 +1,13 @@
 Wolfrailsalpha::Application.routes.draw do
   root 'static_pages#home'
 
-  resources :users
+  resources :users do
+    post 'move'
+    post 'kill'
+    post 'vote'
+  end
   resources :sessions, only: [:new, :create, :destroy] 
+  resources :game
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

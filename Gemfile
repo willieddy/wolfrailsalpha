@@ -37,6 +37,9 @@ gem 'rails_12factor', '0.0.2'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
