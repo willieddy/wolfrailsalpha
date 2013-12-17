@@ -81,10 +81,14 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to wolfrailsalpha!"
+      respond_with(user) do |format| 
+        format.json { render :json => { :success => true }}
+      end
     else
       respond_with(@user) do |format| 
-        format.json { render :json => { :errors => @user.errors.full_messages }}
+        format.json { render :json => { :errors => @user.errors.full_messages, :success => false}}
       end
+
     end
   end
 
