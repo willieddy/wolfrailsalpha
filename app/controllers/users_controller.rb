@@ -15,6 +15,50 @@ class UsersController < ApplicationController
     end
   end
 
+  def vote 
+    @game = Game.find(1)
+    @vote = User.find(params[:id])
+
+    if !@game.night
+      @vote.vote += 1
+      respond_with(@vote) do |format| 
+        format.json {render :json => { :success => :true } }
+      end
+    else
+      respond_with(@vote) do |format| 
+        format.json {render :json => { :success => :false, :error => "You can't vote at night." } }
+      end
+    end
+  end
+
+  def kill
+    @game = Game.find(1)
+    @wolf = User.find(params[wolf])
+    @town = User.find(params[town])
+
+    if @game.night
+      if @wolf.werewolf
+        @town.dead = true
+        respond_with @town do |format|
+          format.json {render :json => { :success => true } }
+      end
+    end
+  end
+
+  def move
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(move_params)
+      respond_with(@user) do |format|
+        format.json { render :json => { :success => true } }
+      end
+    else
+      respond_with(@user) do |format|
+        format.json { render :json => { :success => false } }
+      end
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     respond_with @user
@@ -75,6 +119,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
+    end
+
+    def move_params
+      params.require(:user).permit(:lat, :long)
     end
 
     def signed_in_user

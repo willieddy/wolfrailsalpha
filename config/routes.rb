@@ -5,6 +5,7 @@ Wolfrailsalpha::Application.routes.draw do
     post 'move'
     post 'kill'
     post 'vote'
+    get 'show_alive'
   end
   resources :sessions, only: [:new, :create, :destroy] 
   resources :game
