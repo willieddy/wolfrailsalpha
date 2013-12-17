@@ -79,9 +79,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to wolfrailsalpha!"
       respond_with(user) do |format| 
+        format.html { 
+          sign_in @user
+          flash[:success] = "Welcome to wolfrailsalpha!"
+        }
         format.json { render :json => { :success => true,
                                         :id => @user.id,
                                         :werewolf => @user.werewolf }}
