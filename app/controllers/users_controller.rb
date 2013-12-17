@@ -41,6 +41,7 @@ class UsersController < ApplicationController
         @town.dead = true
         respond_with @town do |format|
           format.json {render :json => { :success => true } }
+        end
       end
     end
   end
